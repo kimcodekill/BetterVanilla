@@ -1,0 +1,6 @@
+Recipes:
+Add blasting recipes for equipment -> nuggets
+    * based on how much durability left in equipment
+
+Items:
+Add MapBook

@@ -1,0 +1,10 @@
+{
+  "type": "bettervanilla:blasting",
+  "ingredient": {
+    "item": "minecraft:redstone_ore"
+  },
+  "result": "minecraft:redstone",
+  "experience": 0.7,
+  "cookingtime": 100,
+  "count": 8
+}

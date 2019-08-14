@@ -1,0 +1,10 @@
+modLoader="javafml" #mandatory
+loaderVersion="[26,)" #mandatory
+[[mods]] #mandatory
+modId="bettervanilla" #mandatory
+version="1.0.0" #mandatory
+authors="Chokemonster" #optional
+displayName="Better Vanilla" #mandatory
+description='''
+Adds tweaks that chokemonster needs to make vanilla fun
+'''
