@@ -4,3 +4,7 @@ Add blasting recipes for equipment -> nuggets
 
 Items:
 Add MapBook
+Make compass point to actual spawnpoint. If it's a bed it should override default spawn.
+
+Blocks:
+Make SoulSand fall.

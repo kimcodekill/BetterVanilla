@@ -18,12 +18,16 @@ public class BlastingRecipeSerializer<T extends BlastingRecipe> extends net.mine
     public BlastingRecipeSerializer(BlastingRecipeSerializer.IFactory<T> factoryIn, int cookingTimeIn) {
         this.cookingTime = cookingTimeIn;
         this.iBlastRecipeFactory = factoryIn;
-        setRegistryName("bettervanilla", "blasting");
     }
 
+    /**
+     * TODO
+     * Change "Ingredient" to json object containing IngredientName and Count
+     */
+    @Override
     public T read(ResourceLocation recipeId, JsonObject json) {
         String group = JSONUtils.getString(json, "group", "");
-        JsonElement jsonelement = (JsonElement) (JSONUtils.isJsonArray(json, "ingredient") ? JSONUtils.getJsonArray(json, "ingredient") : JSONUtils.getJsonObject(json, "ingredient"));
+        JsonElement jsonelement = (JSONUtils.isJsonArray(json, "ingredient") ? JSONUtils.getJsonArray(json, "ingredient") : JSONUtils.getJsonObject(json, "ingredient"));
         Ingredient ingredient = Ingredient.deserialize(jsonelement);
         String result = JSONUtils.getString(json, "result");
         ResourceLocation resourcelocation = new ResourceLocation(result);

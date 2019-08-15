@@ -1,6 +1,6 @@
 package chokemonster.bettervanilla.recipes;
 
-import chokemonster.bettervanilla.init.MiscInit;
+import chokemonster.bettervanilla.misc.MiscObjects;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.AbstractCookingRecipe;
@@ -56,7 +56,6 @@ public class BlastingRecipe extends AbstractCookingRecipe {
         return nonnulllist;
     }
 
-
     @Override
     public ItemStack getRecipeOutput() {
         return this.result;
@@ -74,7 +73,7 @@ public class BlastingRecipe extends AbstractCookingRecipe {
 
     @Override
     public IRecipeSerializer<?> getSerializer() {
-        return MiscInit.BETTERBLASTINGRECIPE;
+        return MiscObjects.blasting;
     }
 
     public int getCookTime() {

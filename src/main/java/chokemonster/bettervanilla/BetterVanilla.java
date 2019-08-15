@@ -8,6 +8,5 @@ import org.apache.logging.log4j.Logger;
 @Mod(Reference.MODID)
 public class BetterVanilla {
     // Directly reference a log4j logger.
-    public static final Logger LOGGER = LogManager.getLogger();
-
+    public static final Logger BETTERVANILLALOGGER = LogManager.getLogger();
 }
