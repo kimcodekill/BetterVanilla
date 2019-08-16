@@ -1,7 +1,8 @@
-[![Better Vanilla logo](https://imgur.com/CyIbxiC.png)](https://www.curseforge.com/minecraft/mc-mods/chokemonsters-bettervanilla)
-# [BetterVanilla](https://www.curseforge.com/minecraft/mc-mods/chokemonsters-bettervanilla) 
 
-# Features
+
+# <a href="https://www.curseforge.com/minecraft/mc-mods/chokemonsters-bettervanilla"><img src="https://imgur.com/CyIbxiC.png" width="100" height="100"></a> [BetterVanilla](https://www.curseforge.com/minecraft/mc-mods/chokemonsters-bettervanilla) 
+
+### Features
 * Modifies Blast Furnace to double ore output instead of speeding up processing.
     * This is balanced through being as slow as a regular furnace and using twice the amount of fuel.
 * Modifies Soul Sand to fall.
