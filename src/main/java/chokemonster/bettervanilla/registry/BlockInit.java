@@ -1,6 +1,7 @@
 package chokemonster.bettervanilla.registry;
 
 import chokemonster.bettervanilla.Reference;
+import chokemonster.bettervanilla.blocks.CharcoalBlock;
 import chokemonster.bettervanilla.blocks.FallingSoulSandBlock;
 import net.minecraft.block.Block;
 import net.minecraftforge.event.RegistryEvent;
@@ -14,7 +15,8 @@ public class BlockInit {
     public static void onBlockRegistry(final RegistryEvent.Register<Block> BlockRegistryEvent) {
 
         BlockRegistryEvent.getRegistry().registerAll(
-                new FallingSoulSandBlock().setRegistryName("minecraft", "soul_sand")
+                new FallingSoulSandBlock().setRegistryName("minecraft", "soul_sand"),
+                new CharcoalBlock().setRegistryName(Reference.MODID, "charcoal_block")
         );
     }
 }
