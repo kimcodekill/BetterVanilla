@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:blasting",
+  "type": "bettervanilla:blasting",
   "ingredient": [
     {
       "item": "minecraft:iron_pickaxe"
@@ -46,5 +46,6 @@
   ],
   "result": "minecraft:iron_nugget",
   "experience": 0.1,
-  "cookingtime": 100
+  "cookingtime": 100,
+  "count": 9
 }

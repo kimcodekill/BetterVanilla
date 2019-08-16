@@ -1,5 +1,6 @@
 package chokemonster.bettervanilla.recipes;
 
+import chokemonster.bettervanilla.BetterVanilla;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.minecraft.item.ItemStack;
@@ -30,6 +31,9 @@ public class BlastingRecipeSerializer<T extends BlastingRecipe> extends net.mine
         JsonElement jsonelement = (JSONUtils.isJsonArray(json, "ingredient") ? JSONUtils.getJsonArray(json, "ingredient") : JSONUtils.getJsonObject(json, "ingredient"));
         Ingredient ingredient = Ingredient.deserialize(jsonelement);
         String result = JSONUtils.getString(json, "result");
+        if (result.contains("nugget")) {
+            BetterVanilla.BETTERVANILLALOGGER.info(ingredient.toString());
+        }
         ResourceLocation resourcelocation = new ResourceLocation(result);
         ItemStack itemstack = new ItemStack(ForgeRegistries.ITEMS.getValue(resourcelocation));
         float experience = JSONUtils.getFloat(json, "experience", 0.0F);
