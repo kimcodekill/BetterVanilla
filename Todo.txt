@@ -1,9 +1,14 @@
 Recipes:
 Add blasting recipes for equipment -> nuggets
     * based on how much durability left in equipment
+Add 3 gravel = 1 flint recipe
+Replace paper recipe with shapeless recipe
+Add slab to full block recipes
+Modify stair recipe to give 8 stairs
 
 Items:
 Add MapBook
 Make compass point to actual spawnpoint. If it's a bed it should override default spawn.
 
 Blocks:
+Add hidden blocks (command block, barrier, portal, etc.) to new creative tab called "Hidden"

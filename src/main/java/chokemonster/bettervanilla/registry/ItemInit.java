@@ -2,6 +2,7 @@ package chokemonster.bettervanilla.registry;
 
 import chokemonster.bettervanilla.Reference;
 import chokemonster.bettervanilla.blocks.Blocks;
+import chokemonster.bettervanilla.items.BetterCompassItem;
 import chokemonster.bettervanilla.items.BlockItemBurnable;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -18,7 +19,8 @@ public class ItemInit {
 
         ItemRegistryEvent.getRegistry().registerAll(
                 new BlockItem(Blocks.soul_sand, new Item.Properties().group(ItemGroup.DECORATIONS)).setRegistryName(Blocks.soul_sand.getRegistryName()),
-                new BlockItemBurnable(Blocks.charcoal_block, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS), 16000).setRegistryName(Blocks.charcoal_block.getRegistryName())
+                new BlockItemBurnable(Blocks.charcoal_block, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS), 16000).setRegistryName(Blocks.charcoal_block.getRegistryName()),
+                new BetterCompassItem(new Item.Properties().group(ItemGroup.TOOLS)).setRegistryName("minecraft", "compass")
         );
     }
 }

@@ -18,77 +18,79 @@ public class BetterNetherSurfaceBuilder extends NetherSurfaceBuilder {
     private static final BlockState NETHERRACK;
     private static final BlockState GRAVEL;
     private static final BlockState SOUL_SAND;
-    protected long field_205552_a;
-    protected OctavesNoiseGenerator field_205553_b;
+    protected long seed;
+    protected OctavesNoiseGenerator noiseGenerator;
 
     public BetterNetherSurfaceBuilder() {
         super(SurfaceBuilderConfig::deserialize);
     }
 
-    public void buildSurface(Random p_205610_1_, IChunk p_205610_2_, Biome p_205610_3_, int p_205610_4_, int p_205610_5_, int p_205610_6_, double p_205610_7_, BlockState p_205610_9_, BlockState p_205610_10_, int p_205610_11_, long p_205610_12_, SurfaceBuilderConfig p_205610_14_) {
-        int lvt_15_1_ = p_205610_11_ + 1;
-        int lvt_16_1_ = p_205610_4_ & 15;
-        int lvt_17_1_ = p_205610_5_ & 15;
-        double lvt_18_1_ = 0.03125D;
-        boolean lvt_20_1_ = this.field_205553_b.func_205563_a((double) p_205610_4_ * 0.03125D, (double) p_205610_5_ * 0.03125D, 0.0D) + p_205610_1_.nextDouble() * 0.2D > 0.0D;
-        boolean lvt_21_1_ = this.field_205553_b.func_205563_a((double) p_205610_4_ * 0.03125D, 109.0D, (double) p_205610_5_ * 0.03125D) + p_205610_1_.nextDouble() * 0.2D > 0.0D;
-        int lvt_22_1_ = (int) (p_205610_7_ / 3.0D + 3.0D + p_205610_1_.nextDouble() * 0.25D);
-        BlockPos.MutableBlockPos lvt_23_1_ = new BlockPos.MutableBlockPos();
-        int lvt_24_1_ = -1;
-        BlockState lvt_25_1_ = NETHERRACK;
-        BlockState lvt_26_1_ = NETHERRACK;
+    @Override
+    public void buildSurface(Random random, IChunk chunkIn, Biome biomeIn, int x, int z, int startHeight, double noise, BlockState defaultBlock, BlockState defaultFluid, int seaLevel, long seed, SurfaceBuilderConfig config) {
+        int middleY = seaLevel + 1;
+        int posX = x & 15;
+        int posZ = z & 15;
+        double multiplier = 0.03125D;
+        boolean addNoiseA = this.noiseGenerator.func_205563_a((double) x * multiplier, (double) z * multiplier, 0.0D) + random.nextDouble() * 0.2D > 0.0D;
+        boolean addNoiseB = this.noiseGenerator.func_205563_a((double) x * multiplier, 109.0D, (double) z * multiplier) + random.nextDouble() * 0.2D > 0.0D;
+        int noiseInt = (int) (noise / 3.0D + 3.0D + random.nextDouble() * 0.25D);
+        BlockPos.MutableBlockPos mutableBlockPos = new BlockPos.MutableBlockPos();
+        int stateFlag = -1;
+        BlockState blockToPlaceA = NETHERRACK;
+        BlockState blockToPlaceB = NETHERRACK;
 
-        for (int lvt_27_1_ = 127; lvt_27_1_ >= 0; --lvt_27_1_) {
-            lvt_23_1_.setPos(lvt_16_1_, lvt_27_1_, lvt_17_1_);
-            BlockState lvt_28_1_ = p_205610_2_.getBlockState(lvt_23_1_);
-            if (lvt_28_1_.getBlock() != null && !lvt_28_1_.isAir()) {
-                if (lvt_28_1_.getBlock() == p_205610_9_.getBlock()) {
-                    if (lvt_24_1_ == -1) {
-                        if (lvt_22_1_ <= 0) {
-                            lvt_25_1_ = CAVE_AIR;
-                            lvt_26_1_ = NETHERRACK;
-                        } else if (lvt_27_1_ >= lvt_15_1_ - 4 && lvt_27_1_ <= lvt_15_1_ + 1) {
-                            lvt_25_1_ = NETHERRACK;
-                            lvt_26_1_ = NETHERRACK;
-                            if (lvt_21_1_) {
-                                lvt_25_1_ = GRAVEL;
-                                lvt_26_1_ = NETHERRACK;
+        for (int posY = 127; posY >= 0; --posY) {
+            mutableBlockPos.setPos(posX, posY, posZ);
+            BlockState blockState = chunkIn.getBlockState(mutableBlockPos);
+            if (blockState.getBlock() != null && !blockState.isAir(chunkIn.getWorldForge(), mutableBlockPos)) {
+                if (blockState.getBlock() == defaultBlock.getBlock()) {
+                    if (stateFlag == -1) {
+                        if (noiseInt <= 0) {
+                            blockToPlaceA = CAVE_AIR;
+                            blockToPlaceB = NETHERRACK;
+                        } else if (posY >= middleY - 4 && posY <= middleY + 1) {
+                            blockToPlaceA = NETHERRACK;
+                            blockToPlaceB = NETHERRACK;
+                            if (addNoiseB) {
+                                blockToPlaceA = GRAVEL;
+                                blockToPlaceB = NETHERRACK;
                             }
 
-                            if (lvt_20_1_) {
-                                lvt_25_1_ = SOUL_SAND;
-                                lvt_26_1_ = SOUL_SAND;
+                            if (addNoiseA) {
+                                blockToPlaceA = SOUL_SAND;
+                                blockToPlaceB = SOUL_SAND;
                             }
                         }
 
-                        if (lvt_27_1_ < lvt_15_1_ && (lvt_25_1_ == null || lvt_25_1_.isAir())) {
-                            lvt_25_1_ = p_205610_10_;
+                        if (posY < middleY && (blockToPlaceA == null || blockToPlaceA.getBlock() == Blocks.CAVE_AIR /* blocktoPlaceA.isAir()*/)) {
+                            blockToPlaceA = defaultFluid;
                         }
 
-                        lvt_24_1_ = lvt_22_1_;
-                        if (lvt_27_1_ >= lvt_15_1_ - 1) {
-                            p_205610_2_.setBlockState(lvt_23_1_, lvt_25_1_, false);
+                        stateFlag = noiseInt;
+                        if (posY >= middleY - 1) {
+                            chunkIn.setBlockState(mutableBlockPos, blockToPlaceA, false);
                         } else {
-                            p_205610_2_.setBlockState(lvt_23_1_, lvt_26_1_, false);
+                            chunkIn.setBlockState(mutableBlockPos, blockToPlaceB, false);
                         }
-                    } else if (lvt_24_1_ > 0) {
-                        --lvt_24_1_;
-                        p_205610_2_.setBlockState(lvt_23_1_, lvt_26_1_, false);
+                    } else if (stateFlag > 0) {
+                        --stateFlag;
+                        chunkIn.setBlockState(mutableBlockPos, blockToPlaceB, false);
                     }
                 }
             } else {
-                lvt_24_1_ = -1;
+                stateFlag = -1;
             }
         }
 
     }
 
-    public void setSeed(long p_205548_1_) {
-        if (this.field_205552_a != p_205548_1_ || this.field_205553_b == null) {
-            this.field_205553_b = new OctavesNoiseGenerator(new SharedSeedRandom(p_205548_1_), 4);
+    @Override
+    public void setSeed(long seedIn) {
+        if (this.seed != seedIn || this.noiseGenerator == null) {
+            this.noiseGenerator = new OctavesNoiseGenerator(new SharedSeedRandom(seedIn), 4);
         }
 
-        this.field_205552_a = p_205548_1_;
+        this.seed = seedIn;
     }
 
     static {
