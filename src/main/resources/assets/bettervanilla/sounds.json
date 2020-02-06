@@ -1,0 +1,11 @@
+{
+  "music_disc.calm": {
+    "category": "record",
+    "sounds": [
+      {
+        "name": "bettervanilla:music/calm_mono",
+        "stream": true
+      }
+    ]
+  }
+}

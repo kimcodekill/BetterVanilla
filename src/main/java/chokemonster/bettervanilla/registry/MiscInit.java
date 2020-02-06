@@ -5,6 +5,9 @@ import chokemonster.bettervanilla.biomes.BetterNetherBiome;
 import chokemonster.bettervanilla.recipes.BlastingRecipe;
 import chokemonster.bettervanilla.recipes.BlastingRecipeSerializer;
 import net.minecraft.item.crafting.IRecipeSerializer;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -24,6 +27,13 @@ public class MiscInit {
     public static void onBiomeRegistry(final RegistryEvent.Register<Biome> registryEvent) {
         registryEvent.getRegistry().registerAll(
                 new BetterNetherBiome().setRegistryName("minecraft", "nether")
+        );
+    }
+
+    @SubscribeEvent
+    public static void onSoundEventRegistry(final RegistryEvent.Register<SoundEvent> registryEvent) {
+        registryEvent.getRegistry().registerAll(
+                //new SoundEvent(new ResourceLocation(Reference.MODID + "music_disc.calm" )).setRegistryName(Reference.MODID, "music_disc.calm")
         );
     }
 }
